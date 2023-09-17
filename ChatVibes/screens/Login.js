@@ -1,3 +1,10 @@
+/**
+ * Login screen
+ * 
+ * Add functionality to sign in with Google, should
+ * just be an API of some kind
+ */
+
 import React, { useState } from "react";
 import {
   StyleSheet,
