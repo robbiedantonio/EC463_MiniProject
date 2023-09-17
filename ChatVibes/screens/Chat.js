@@ -1,3 +1,7 @@
+/**
+ * Chat screen, where users can send and receive messages
+ */
+
 import React, {
     useState,
     useEffect,
