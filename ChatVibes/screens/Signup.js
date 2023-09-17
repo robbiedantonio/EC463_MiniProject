@@ -1,3 +1,11 @@
+/**
+ * Sign up screen, where user can register their
+ * email.
+ * 
+ * This should also include the sign in with google
+ * screen from google/firebase API
+ */
+
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -14,7 +22,8 @@ import {
   Platform,
 } from "react-native";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth, database } from "../config/firebase";
+import { doc, setDoc } from "firebase/firestore";
 const clouds = require("../assets/clouds.png");
 
 export default function Signup({ navigation }) {
@@ -23,6 +32,7 @@ export default function Signup({ navigation }) {
 
   const onHandleSignup = () => {
     if (email !== "" && password !== "") {
+      setDoc(doc(database, "users", email), {}); // Sends user emails to firestore database
       createUserWithEmailAndPassword(auth, email, password)
         .then(() => console.log("Signup success"))
         .catch((err) => Alert.alert("Signup error", err.message));
