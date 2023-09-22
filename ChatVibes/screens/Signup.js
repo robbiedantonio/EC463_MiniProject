@@ -27,17 +27,25 @@ import { doc, setDoc } from "firebase/firestore";
 const clouds = require("../assets/clouds.png");
 
 export default function Signup({ navigation }) {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const onHandleSignup = () => {
-    if (email !== "" && password !== "") {
-      setDoc(doc(database, "users", email), {}); // Sends user emails to firestore database
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(() => console.log("Signup success"))
-        .catch((err) => Alert.alert("Signup error", err.message));
+    if (email !== "" && password !== "" && username !== "") {
+        setDoc(doc(database, "users", username), {  // push username and email to firestore database
+            username: username,
+            email: email
+            //uid: 
+        });
+
+        createUserWithEmailAndPassword(auth, email, password)
+          .then(() => console.log("Signup success"))
+          .catch((err) => Alert.alert("Signup error", err.message));
+
     }
   };
+
 
   return (
     <KeyboardAvoidingView
@@ -51,6 +59,16 @@ export default function Signup({ navigation }) {
       >
         <SafeAreaView style={styles.form}>
           <Text style={styles.title}>ChatVibes</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter username"
+            autoCapitalize="none"
+            keyboardType="default"
+            textContentType="default"
+            autoFocus={true}
+            value={username}
+            onChangeText={(text) => setUsername(text)}
+          />
           <TextInput
             style={styles.input}
             placeholder="Enter email"
