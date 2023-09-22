@@ -13,7 +13,8 @@ import { database } from "../config/firebase";
 
 const Users = () => {
 	const [users, setUsers] = useState([]);
-	const userRef = firebase.firestore().collection('users');
+	//const userRef = firebase.firestore().collection('users');
+	const userRef = doc(database, "users", setUsers);
 
 	useEffect(async () => {
 		userRef
